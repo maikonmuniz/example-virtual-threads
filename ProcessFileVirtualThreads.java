@@ -23,19 +23,11 @@ class ProcessFileVirtualThreads {
         int sizeBlock = 150;
 
         try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
-            for (int i = 1; i <= lines.size(); i += sizeBlock) {
-                int start = i;
-                int end = Math.min(i + sizeBlock, lines.size());
+            for (int linePosition = 1; linePosition <= lines.size(); linePosition += sizeBlock) {
+                int start = linePosition;
+                int end = Math.min(linePosition + sizeBlock, lines.size());
 
-                for (int j = start; j < end; j++) {
-                    String linha = lines.get(j);
-                    Files.writeString(
-                        pathFile2,
-                        linha + System.lineSeparator(),
-                        StandardOpenOption.APPEND
-                    );
-                }
-                
+            addLine (start, end, lines);
             }
         }
 
@@ -46,5 +38,23 @@ class ProcessFileVirtualThreads {
 
         System.out.println("Segundos: " + segundos);
         System.out.println("duração em milli segundos. " + durationInMillis);
+    }
+
+    public static void addLine (
+        int start,
+        int end,
+        List<String> lines
+        ) throws IOException {
+        
+        Path pathFile2 = Path.of("file2.txt");
+
+        for (int j = start; j < end; j++) {
+            String linha = lines.get(j);
+            Files.writeString(
+                pathFile2,
+                linha + System.lineSeparator(),
+                StandardOpenOption.APPEND
+            );
+        }
     }
 }

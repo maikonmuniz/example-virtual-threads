@@ -8,4 +8,8 @@ Este repositorio tem o objetivo de apresentar o uso das virtual threads em compa
 #### ✅ Criar aberturas de threads virtual para processar um arquivo com grandes volumes de dados  .
 
 ## ⚙️ Pré-requisitos  
-- ☕ **JDK v21**
+- **JDK v21**
+
+## run
+- javac name_file.java
+- java name_file.java
